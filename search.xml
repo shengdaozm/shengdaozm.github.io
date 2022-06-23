@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Git操作指南</title>
+    <url>/2022/06/09/Git%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/</url>
+    <content><![CDATA[<p>​        相信很多人都已经知道了git是个什么东西，毕竟访问github托管自己的代码的时候，一个一个拉取文件显的挺愚蠢的，这篇博客也将从基础操作介绍git的部分用法。（本博客将会不断地进行更新）</p>
+<span id="more"></span>
+<blockquote>
+<p>免责声明：更多的操作请访问<a href="https://git.oschina.net/progit/">git pro</a></p>
+</blockquote>
+<h1 id="前置操作"><a href="#前置操作" class="headerlink" title="前置操作"></a>前置操作</h1><p>​        在进行git的基础操作之前，我们首先将隐藏文件打开。在任意文件夹的上面打开查看-&gt;显示-&gt;显示隐藏文件即可。</p>
+<h1 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h1><h2 id="个人信息绑定"><a href="#个人信息绑定" class="headerlink" title="个人信息绑定"></a>个人信息绑定</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name（&quot;username&quot;</span><br><span class="line">git config --global user.email useremail@ai.com</span><br></pre></td></tr></table></figure>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><ul>
+<li>如果我们执行从github克隆代码，执行如下命令</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone httpsxxxxxx</span><br></pre></td></tr></table></figure>
+<p>​      那么，在这个文件夹下，就可以看到<code>.git</code>文件，标记当前目录是初始化。</p>
+<ul>
+<li>如果，我们对本地的文件进行初始化。进入powershell</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<p>​    同样出现<code>.git</code>文件，完成初始化。</p>
+<h2 id="拉取"><a href="#拉取" class="headerlink" title="拉取"></a>拉取</h2><p>在每一次的工作之前，都需要执行</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure>
+<p>拉取远程的代码与本地进行合并，（请一定要这样做，尤其是团队合作）</p>
+<h2 id="提交"><a href="#提交" class="headerlink" title="提交"></a>提交</h2><p>在每次的工作结束后，执行如下命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git add . %添加所有文件到缓存区</span><br><span class="line">git add xxxx %添加某一个文件</span><br><span class="line">%一般偷懒就直接执行第一个命令</span><br><span class="line"></span><br><span class="line">git commit -m &quot;string&quot; %输入一个string（字符串）的提交说明</span><br><span class="line"></span><br><span class="line">git push -u gitssh %输入对应的仓库ssh即可，完成对应的代码提交</span><br></pre></td></tr></table></figure>
+<p>可以将上述的文件编写成<code>.bat</code>脚本，每次点击一下即可完成提交。比如，下面即使，我第一次使用git用的</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd xxxxxx</span><br><span class="line">git add .</span><br><span class="line">set /p s=</span><br><span class="line">git commit -m %s%</span><br><span class="line">git pus -u gitssh</span><br><span class="line">@pause</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>指南</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cf-785-div2</title>
+    <url>/2022/04/30/cf-785-div2/</url>
+    <content><![CDATA[<h2 id="题目传送门"><a href="#题目传送门" class="headerlink" title="题目传送门"></a><a href="https://codeforces.com/contest/1673">题目传送门</a></h2><blockquote>
+<p>思维,字符串,背包,</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="A"><a href="#A" class="headerlink" title="A"></a>A</h2><p><strong>thinking</strong></p>
+<p>贪心，对于Alice来说，字符串的长度为偶数就取完；为奇数，就只留一个</p>
+<p><strong>solution</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    string s;cin&gt;&gt;s;</span><br><span class="line">    <span class="comment">//Alice --偶数</span></span><br><span class="line">    <span class="comment">//Bob --奇数</span></span><br><span class="line">    <span class="type">int</span> n=s.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">if</span>(n%<span class="number">2</span>==<span class="number">0</span>) &#123;</span><br><span class="line">    	<span class="type">int</span> sum=<span class="number">0</span>;</span><br><span class="line">    	<span class="keyword">for</span>(<span class="keyword">auto</span> &amp;x:s) sum+=x-<span class="string">&#x27;a&#x27;</span>+<span class="number">1</span>;</span><br><span class="line">    		cout&lt;&lt;<span class="string">&quot;Alice &quot;</span>&lt;&lt;sum&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    	<span class="keyword">if</span>(s[<span class="number">0</span>]&gt;s[n<span class="number">-1</span>]) &#123;</span><br><span class="line">    		<span class="comment">//前面一个大</span></span><br><span class="line">    		<span class="type">int</span> sum=<span class="number">0</span>;</span><br><span class="line">    		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n<span class="number">-1</span>;++i) sum+=s[i]-<span class="string">&#x27;a&#x27;</span>+<span class="number">1</span>;</span><br><span class="line">    		<span class="keyword">if</span>(sum&gt;s[n<span class="number">-1</span>]-<span class="string">&#x27;a&#x27;</span>+<span class="number">1</span>) &#123;</span><br><span class="line">    			cout&lt;&lt;<span class="string">&quot;Alice &quot;</span>&lt;&lt;sum-(s[n<span class="number">-1</span>]-<span class="string">&#x27;a&#x27;</span>+<span class="number">1</span>)&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    			cout&lt;&lt;<span class="string">&quot;Bob &quot;</span>&lt;&lt;s[n<span class="number">-1</span>]-<span class="string">&#x27;a&#x27;</span>+<span class="number">1</span>-sum&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    		&#125;</span><br><span class="line">    	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    		<span class="type">int</span> sum=<span class="number">0</span>;</span><br><span class="line">    		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;n;++i) sum+=s[i]-<span class="string">&#x27;a&#x27;</span>+<span class="number">1</span>;</span><br><span class="line">    		<span class="keyword">if</span>(sum&gt;s[n<span class="number">-1</span>]-<span class="string">&#x27;a&#x27;</span>+<span class="number">1</span>) &#123;</span><br><span class="line">    			cout&lt;&lt;<span class="string">&quot;Alice &quot;</span>&lt;&lt;sum-(s[<span class="number">0</span>]-<span class="string">&#x27;a&#x27;</span>+<span class="number">1</span>)&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    			cout&lt;&lt;<span class="string">&quot;Bob &quot;</span>&lt;&lt;s[<span class="number">0</span>]-<span class="string">&#x27;a&#x27;</span>+<span class="number">1</span>-sum&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    		&#125;</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="B"><a href="#B" class="headerlink" title="B"></a>B</h2><p><strong>thinking</strong></p>
+<p>如题，对于题目中任意两个不同的字母，在s的字串中如果存在频次相差大于1的情况，就是错的，反之，就是对的。<br>我们可以这样去考虑，对于s的每一个不同类型的字符，我们只需要找到不含有它的字串，查找是否存在出现的频次大于等于2的字符存在即可，最终可以得到答案。</p>
+<p><strong>solution</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">check</span><span class="params">(<span class="type">int</span> x,string &amp;s)</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> c[<span class="number">26</span>];</span><br><span class="line">	<span class="type">int</span> n=s.<span class="built_in">size</span>();</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i) &#123;</span><br><span class="line">		<span class="keyword">if</span>(s[i]-<span class="string">&#x27;a&#x27;</span>==x) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="built_in">memset</span>(c,<span class="number">0</span>,<span class="built_in">sizeof</span>(c));</span><br><span class="line">		<span class="type">int</span> j=i;</span><br><span class="line">		c[s[i]-<span class="string">&#x27;a&#x27;</span>]++;</span><br><span class="line">		<span class="keyword">while</span>(j+<span class="number">1</span>&lt;n&amp;&amp;s[j+<span class="number">1</span>]-<span class="string">&#x27;a&#x27;</span>!=x) &#123;</span><br><span class="line">			++j;</span><br><span class="line">			<span class="keyword">if</span>(++c[s[j]-<span class="string">&#x27;a&#x27;</span>]&gt;<span class="number">1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		i=j;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    string s;cin&gt;&gt;s;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">cnt</span><span class="params">(<span class="number">26</span>,<span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="type">int</span> n=s.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i) ++cnt[s[i]-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">26</span>;++i) &#123;</span><br><span class="line">    	<span class="keyword">if</span>(cnt[i]&amp;&amp;!<span class="built_in">check</span>(i,s)) &#123;</span><br><span class="line">    		cout&lt;&lt;<span class="string">&quot;NO&quot;</span>&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    		<span class="keyword">return</span>;</span><br><span class="line">    	&#125; </span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;YES&quot;</span>&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="C"><a href="#C" class="headerlink" title="C"></a>C</h2><p><strong>thinking</strong></p>
+<p>显然，题目要求查找回文串，我们提前预处理对应的回文数字，剩下的对于每一个数字，问题转变成了完全背包求方案数的问题，即可得到解决。</p>
+<p><strong>solution</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="D"><a href="#D" class="headerlink" title="D"></a>D</h2><p><strong>thinking</strong></p>
+<p><strong>solution</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>codeforces</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cf-787-div3</title>
+    <url>/2022/05/06/cf-787-div3/</url>
+    <content><![CDATA[<blockquote>
+<p>思维，模拟，贪心</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>codeforces</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cf-789-div2</title>
+    <url>/2022/05/09/cf-789-div2/</url>
+    <content><![CDATA[<blockquote>
+<p>思维、</p>
+</blockquote>
+<p><a href="https://codeforces.com/contest/1678/problems">题目传送门</a></p>
+<!---more-->
+<h2 id="A"><a href="#A" class="headerlink" title="A"></a>A</h2><p><strong>thinking</strong></p>
+<p><strong>solution</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n;cin&gt;&gt;n;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">a</span><span class="params">(n)</span></span>;</span><br><span class="line">    <span class="type">int</span> zero=<span class="number">0</span>;</span><br><span class="line">    unordered_set&lt;<span class="type">int</span>&gt;s;</span><br><span class="line">    <span class="type">bool</span> ok=<span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i) &#123;</span><br><span class="line">    	cin&gt;&gt;a[i];</span><br><span class="line">    	<span class="keyword">if</span>(s.<span class="built_in">count</span>(a[i])) ok=<span class="literal">true</span>;</span><br><span class="line">    	<span class="keyword">else</span> s.<span class="built_in">insert</span>(a[i]);</span><br><span class="line">    	<span class="keyword">if</span>(a[i]==<span class="number">0</span>) ++zero;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(zero&gt;<span class="number">0</span>) &#123;</span><br><span class="line">    	cout&lt;&lt;n-zero&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    	<span class="keyword">if</span>(ok) cout&lt;&lt;n&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    	<span class="keyword">else</span> cout&lt;&lt;n+<span class="number">1</span>&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="B"><a href="#B" class="headerlink" title="B"></a>B</h2><p><strong>thinking</strong></p>
+<p><strong>solution</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> n;string s;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    cin &gt;&gt; s;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">0</span>, y = <span class="number">0</span>;</span><br><span class="line">    <span class="type">char</span> pre = <span class="string">&#x27;?&#x27;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">length</span>(); i += <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s[i] != s[i + <span class="number">1</span>])x++;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (pre != s[i])y++;</span><br><span class="line">            pre = s[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; x &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; <span class="built_in">max</span>(<span class="number">1</span>, y) &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="C"><a href="#C" class="headerlink" title="C"></a>C</h2><p><strong>thinking</strong></p>
+<p><strong>solution</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n;cin&gt;&gt;n;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">a</span><span class="params">(n)</span></span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i) cin&gt;&gt;a[i];</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">pre</span>(n,<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(<span class="number">5001</span>,<span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i) &#123;</span><br><span class="line">    	<span class="keyword">if</span>(i==<span class="number">0</span>) &#123;</span><br><span class="line">    		<span class="keyword">for</span>(<span class="type">int</span> j=a[i];j&lt;=n;++j) pre[i][j]++;</span><br><span class="line">    	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    		<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=n;++j) pre[i][j]+=pre[i<span class="number">-1</span>][j];</span><br><span class="line">    		<span class="keyword">for</span>(<span class="type">int</span> j=a[i];j&lt;=n;++j) pre[i][j]++;</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//枚举bc的情况，</span></span><br><span class="line">	ll ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> b=<span class="number">1</span>;b&lt;n;++b) &#123;</span><br><span class="line">    	<span class="keyword">for</span>(<span class="type">int</span> c=b+<span class="number">1</span>;c&lt;n;++c) &#123;</span><br><span class="line">    		<span class="comment">//[0,b-1]-&gt;小于pc的个数</span></span><br><span class="line">    		<span class="comment">//[c+1,n-1]-&gt;小于pb的个数</span></span><br><span class="line">    		ans+=(ll)pre[b<span class="number">-1</span>][a[c]<span class="number">-1</span>]*(pre[n<span class="number">-1</span>][a[b]<span class="number">-1</span>]-pre[c][a[b]<span class="number">-1</span>]);</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;ans&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>codeforces</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>dp</title>
+    <url>/2022/06/03/dp/</url>
+    <content><![CDATA[<p>持续更新</p>
+<span id="more"></span>
+<h1 id="背包dp"><a href="#背包dp" class="headerlink" title="背包dp"></a>背包dp</h1><h2 id="01背包"><a href="#01背包" class="headerlink" title="01背包"></a>01背包</h2><p>经典的背包问题：N个物品，容量为V的背包，问最大的装载价值时多少，物品只有一个</p>
+<p><strong>thnking</strong></p>
+<p>我们使用$f[i][j]$来表示当背包体积为j的时候，选取过前i个物品时的背包价值最大值</p>
+<p>所以，状态方程如下：</p>
+<script type="math/tex; mode=display">
+f[0][0]=0;\\
+当我们更新到第i个物品的时候，对于第i个物品的时候，我们有两种选择，选与不选\\
+1、不选 f[i][j]=f[i-1][j]\\
+2、选  f[i][j]=f[i-1][j-v[i]]+w[i]\\
+综上，有
+f[i][j]=max(f[i-1][j],f[i-1][j-v[i]]+w[i])\\
+代码实现如下</script><p>完成了二维数组的dp求解后，我们考虑对空间进行进一步的优化，我们观察到$f[i]的状态只与f[i-1]的状态有关$，因此我们可以将二维数组降到一维数组，我们有更加简洁的代码如下：</p>
+<p><strong>solution</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1010</span>;</span><br><span class="line"><span class="type">int</span> v[N],w[N],f[N][N];</span><br><span class="line"><span class="comment">//f[i][j]的含义是选取第i个物品，口袋体积为j时的最大价值</span></span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i) cin&gt;&gt;v[i]&gt;&gt;w[i];</span><br><span class="line">	f[<span class="number">0</span>][<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;=m;++j) &#123;</span><br><span class="line">			f[i][j]=f[i<span class="number">-1</span>][j];</span><br><span class="line">			<span class="keyword">if</span>(j&gt;=v[i])</span><br><span class="line">				f[i][j]=<span class="built_in">max</span>(f[i][j],f[i<span class="number">-1</span>][j-v[i]]+w[i]);</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="type">int</span> ans=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;=m;++i) &#123;</span><br><span class="line">		ans=<span class="built_in">max</span>(ans,f[n][i]);</span><br><span class="line">	&#125;	</span><br><span class="line">	</span><br><span class="line">	cout&lt;&lt;ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1010</span>;</span><br><span class="line"><span class="type">int</span> v[N],w[N],f[N];</span><br><span class="line"><span class="comment">//f[j]的含义是口袋体积是j时的最大价值</span></span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i) cin&gt;&gt;v[i]&gt;&gt;w[i];</span><br><span class="line">    f[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i) </span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=m;j&gt;=<span class="number">0</span>;j--)</span><br><span class="line">            f[j]=<span class="built_in">max</span>(f[j],f[j-v[i]]+w[i]);</span><br><span class="line">    <span class="comment">//我们对每一次的物品选取进行考虑，</span></span><br><span class="line">    <span class="comment">//这一句的状态转换方程的含义是指当我们决定是否选择第i个物品的时候，(此时f[j]中存放的都是选取过i-1的最大价值)</span></span><br><span class="line">    <span class="comment">//我们考虑是否加入这个物品，就是两种情况：</span></span><br><span class="line">    <span class="comment">//1.不加，那么背包体积不变，即是f[j]</span></span><br><span class="line">    <span class="comment">//2.加，从背包中腾出v[i]的体积放入，腾出v[i]的体积放入该物品，</span></span><br><span class="line">    <span class="comment">//对应的剩下的体积，我们选择存放更多的价值,即是f[j-v[i]]+w[i]</span></span><br><span class="line">    cout&lt;&lt;f[m];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">这里会有一个疑问：第10行进行正序的循环行不行？</span></span><br><span class="line"><span class="comment">答:不行，我们知道，计算f[j]的时候，需要用到f[j-v[i]]的结果，理论上，这里的f[j-v[i]]就是i-1的情况下的价值，如果进行正序遍历的话，这里就是第i个了，就会发生错误。</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="完全背包"><a href="#完全背包" class="headerlink" title="完全背包"></a>完全背包</h2><p>经典的背包问题：N个物品，容量为V的背包，问最大的装载价值是多少，每种物品都有无限个</p>
+<p><strong>thinking</strong></p>
+<p>我们直接对代码进行讲解。</p>
+<p><strong>solution</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1010</span>;</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="type">int</span> v[N],w[N],f[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i)cin&gt;&gt;v[i]&gt;&gt;w[i];</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i) </span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=v[i];j&lt;=m;++j)</span><br><span class="line">			f[j]=<span class="built_in">max</span>(f[j],f[j-v[i]]+w[i]);</span><br><span class="line">    <span class="comment">/*该种情况下，状态转移方程并没有发生变化，唯一的变化就是内层循环的循环顺序被我们调换了一下，我们考虑这种做法的正确性</span></span><br><span class="line"><span class="comment">    区别于01背包，01背包的物品只有一个，我们采用倒序的方式对f[j]进行更新。但是在多重背包中，物品的数量不限</span></span><br><span class="line"><span class="comment">    因此，我们考虑第i个物品的时候，我们会有拿多少的考虑，采用正序的循环，我们将背包的体积逐渐扩大，隐含地将物品无限选取加了去</span></span><br><span class="line"><span class="comment">    对于第i个物品来说，放入一个，即是j=v[i]，进而体积一步步地进行扩大，当体积能够装下打两个的时候，再次进行更新为腾出v[i]的	状态的背包最大值加上放入物品的最大值，进而更新得到最大值。</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">	cout&lt;&lt;f[m];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//考虑到循环的特殊性，我们同时也可以将存放体积与价值的数组一并去掉</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1010</span>;</span><br><span class="line"><span class="type">int</span> f[N];</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i) &#123;</span><br><span class="line">        <span class="type">int</span> v,w;cin&gt;&gt;v&gt;&gt;w;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=v;j&lt;=m;++j) &#123;</span><br><span class="line">            f[j]=<span class="built_in">max</span>(f[j],f[j-v]+w);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;f[m];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="多重背包"><a href="#多重背包" class="headerlink" title="多重背包"></a>多重背包</h2><p>多重背包的题设在01背包以及完全背包的基础上，再加以限制，具体如下：</p>
+<h3 id="多重背包1"><a href="#多重背包1" class="headerlink" title="多重背包1"></a>多重背包1</h3><p>对于n件物品，每一种物品有$s_i$个，体积为$v_i$,$w_i$，对于体积为V的背包来说，能够装下的物品的最大价值是多少</p>
+<p><strong>thinking</strong></p>
+<p>同理，该种情况下的选择，对比于01背包的状态转移方程，我们只需要改动一下每次比较的最大个数即可，即是</p>
+<script type="math/tex; mode=display">
+在每一次的内层循环之中，我们再加入一层循环来表示物品的个数k\\
+f[j]=max(f[j],f[j-k*v[i]]+k*w[i])</script><p><strong>solution</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1010</span>;</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="type">int</span> v[N],w[N],f[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i) &#123;</span><br><span class="line">		<span class="type">int</span> v,w,s;cin&gt;&gt;v&gt;&gt;w&gt;&gt;s;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=m;j&gt;=v;--j)</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">1</span>;k&lt;=s&amp;&amp;k*v&lt;=j;++k)</span><br><span class="line">				f[j]=<span class="built_in">max</span>(f[j],f[j-k*v]+k*w);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;f[m];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="多重背包2"><a href="#多重背包2" class="headerlink" title="多重背包2"></a>多重背包2</h3><p>下面，我们考虑多重背包的优化问题，在问题1中，我们使用$O(n^3)$的复杂度去进行计算，但是当n的数据范围变大的时候，此种复杂度就比较高了，下面我们考虑相关优化技巧——多重背包的二进制优化方法</p>
+<p>我们可以看到，多重背包的解题思路与01背包是近似的，我们思考能否用01背包进行求解——我们将一个物品($s_i$个)改成$s_i$个独立物品，那么，就相当于多了几个不一样的相同体积和价值的物品对所有的物品执行这样操作，那么得到的物品就可以直接使用01背包进行求解。但是，这样做并没有有降低题目的复杂度，我们必须换一种思考方式。</p>
+<p>我们先从一个小小的题目出发，给定一个整数s，如何用最少的整数，使得每个整数的取与不取两种状态，可以完全表示1-s的所有整数，我们先考虑$2^n-1$，比如说7</p>
+<script type="math/tex; mode=display">
+那么我们可以选取1,2,4，来满足这种情况，则有\\
+1=1\quad2=2\quad3=1+2\quad4=4\quad5=1+5\quad6=2+4\quad7=1+2+4</script><p>这样，我们完成了用三个数来代替7，我们再考虑不为2的整次幂-1的情况下，如果，我们仍然采取选择二进制位的话，选取数字就会溢出。</p>
+<script type="math/tex; mode=display">
+10\quad->1\quad2\quad4\quad8，比如此时，我们显然不能这样表示，那么我们这样表示：10-1-2-4=3,我们用1，2,3,4,来进行表示\\
+有7的例子我可以知道1,2,4可以表示1-7，那么，我们计入3后，就可以表示1-10。</script><p>这样，我们就得到了标准的拆分方法，对于一个整数s，对它一直减去2的整幂操作，直到它小于0，那么剩下的余数就是我们需要的数。</p>
+<p>回到本题，我们对s个物品也可以进行这样的拆分，就可以表示1-s的任意一种选取方案，而我们将复杂度降到了O(logn)。下面就是具体的操作代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="type">int</span> f[<span class="number">2010</span>];</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Good</span> &#123;</span><br><span class="line">	<span class="type">int</span> v,w;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> m,n;cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	vector&lt;Good&gt; goods;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i) &#123;</span><br><span class="line">		<span class="type">int</span> v,w,s;</span><br><span class="line">		cin&gt;&gt;v&gt;&gt;w&gt;&gt;s;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">1</span>;k&lt;=s;++k) &#123;</span><br><span class="line">			s-=k;</span><br><span class="line">			goods.<span class="built_in">push_back</span>(&#123;v*k,w*k&#125;);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(s&gt;<span class="number">0</span>) goods.<span class="built_in">push_back</span>(&#123;v*s,w*s&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> good:goods) &#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=m;j&gt;=good.v;--j) &#123;</span><br><span class="line">			f[j]=<span class="built_in">max</span>(f[j],f[j-good.v]+good.w);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;f[m]&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>dp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>剑挑星河落繁星</title>
+    <url>/2022/05/09/%E5%89%91%E6%8C%91%E6%98%9F%E6%B2%B3%E8%90%BD%E7%B9%81%E6%98%9F/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>大数定理</title>
+    <url>/2022/04/29/%E5%A4%A7%E6%95%B0%E5%AE%9A%E7%90%86/</url>
+    <content><![CDATA[<blockquote>
+<p>天行健，君子以自强不息；</p>
+<p>地势坤，君子以厚德载物。</p>
+</blockquote>
+<span id="more"></span>
+<h1 id="大数定理"><a href="#大数定理" class="headerlink" title="大数定理"></a>大数定理</h1><h2 id="切比雪夫不等式"><a href="#切比雪夫不等式" class="headerlink" title="切比雪夫不等式"></a>切比雪夫不等式</h2><p>若一个随机变量的$E(x)$与$D(x)$都存在，我们考虑$P(|X-E(x)|) \geq \varepsilon $的值是多少，很显然，知道其分布函数或概率分布的时候，简单的积分可以直接求出来。但是，不知道的，我们怎么做？</p>
+<ul>
+<li><strong>定理5.1-切比雪夫不等式</strong></li>
+</ul>
+<p>对于随机变量X存在$E(x),D(x)$的时候，对于任意$\varepsilon &gt;0$，都有</p>
+<p>​                                                    $P(|X-E(X)|\geq\varepsilon)\leq\frac{D(X)}{\varepsilon^2}$</p>
+<p>同理，我们可以很容易地推断出</p>
+<p>​                                                    $P(|X-E(X)|&lt;\varepsilon)\geq1-\frac{D(X)}{\varepsilon^2}$</p>
+<p>证明略。</p>
+<p>我们显然能够看出$X$逼近$E(x)$的概率，与$D(x)$有着很大的关系，$D(x)$越小，其概率越接近于1，这与我们学习的狭义上的方差是一个道理。</p>
+<h2 id="常用大数定理"><a href="#常用大数定理" class="headerlink" title="常用大数定理"></a>常用大数定理</h2><p>所谓大数定理，就是研究什么条件下</p>
+<p>​    $\lim_{n\rightarrow\infty}P(|\frac{1}{n}\sum_{i=1}^{n}{X_i}-\frac{1}{n}\sum_{i=1}^{n}{E(X_i)}|&lt;\varepsilon)=1$</p>
+<p>可以成立</p>
+<ul>
+<li><strong>定义5.1-概率的稳定性</strong>        随机变量序列依照概率收敛于a（略）</li>
+<li><strong>定义5.2</strong></li>
+</ul>
+<p>设随机变量序列$X_n$数学期望$E(x)$存在，令</p>
+<p>${\varepsilon}_n=\frac{1}{n}\sum_{i=1}^{n}{X_i}$</p>
+<p>如果有</p>
+<p>${\varepsilon}_n-E({\varepsilon}_n)\rightarrow0$</p>
+<p>成立，那么就说这样的随机变量序列是服从大数定律的。</p>
+<ul>
+<li><strong>定理5.2-切比雪夫大数定律</strong></li>
+</ul>
+<p>假设$X_n$为相互独立的随机变量的序列，如果存在常数，使得</p>
+<p>​        $D(X_i)\leq C\quad i=1,2…$</p>
+<p>则其满足大数定律</p>
+<ul>
+<li><strong>定理5.3-贝努力大数定律</strong></li>
+</ul>
+<p>设$N_A$是n重贝努力实验中事件$A$的发生次数，p是该事件在每次实验发生的概率，则对任意的实数$\varepsilon&gt;0$，有</p>
+<p>​            $\lim_{n\rightarrow\infty}P(|\frac{N_A}{n}-p|&lt;\varepsilon)=1$</p>
+<ul>
+<li><strong>定理5.4-辛钦大数定律</strong></li>
+</ul>
+<p>设$X_n$是独立且同分布的随机变量序列，且</p>
+<p>​        $E(X_i)=\mu \quad i=1,2,…$</p>
+<p>则对任意的实数$\varepsilon&gt;0$，有</p>
+<p>​    $\lim_{n\rightarrow\infty}P(|\frac{1}{n}\sum_{i=1}^{n}{X_i}-\mu|&lt;\varepsilon)=1$</p>
+<p>成立。</p>
+]]></content>
+      <categories>
+        <category>note</category>
+      </categories>
+      <tags>
+        <tag>math</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>央视夜读</title>
+    <url>/2022/05/11/%E5%A4%AE%E8%A7%86%E5%A4%9C%E8%AF%BB/</url>
+    <content><![CDATA[<p><img src="https://s2.loli.net/2022/05/11/BG4ur18UEN6qaCd.jpg"  width="600"  height = "300" /></p>
+<span id="more"></span>
+<h1 id="愁客叶舟里，夕阳近水时"><a href="#愁客叶舟里，夕阳近水时" class="headerlink" title="愁客叶舟里，夕阳近水时"></a>愁客叶舟里，夕阳近水时</h1><p>我打碎了夕阳，</p>
+<ul>
+<li>我打碎了夕阳，也揉碎了月光。拉着太白大醉了一场，撒下九州的霜</li>
+<li>我打碎了夕阳，借了一碗清汤，想等一束月光，可倒影全是你的模样</li>
+<li>我打碎了夕阳，夜色研磨成霜。繁星摇摇晃晃，跌落人间欢场</li>
+<li>我打碎了夕阳，泻一地橙黄。天边的火烧云，都在笑我荒唐。原谅我知识不忍，将这不堪的过往，揉进清清白白的月光</li>
+</ul>
+<p>鸿是江边鸟，</p>
+<ul>
+<li>鸿是江边鸟，愁是心上秋</li>
+<li>鸿是江边鸟，岚是山间风</li>
+</ul>
+<p>其实“等”字很浪漫，</p>
+<ul>
+<li>其实“等”字很浪漫，它是我在寺前听雨，等你撑着天青色的竹纸伞信步而来</li>
+<li>其实“等”字很浪漫，比如一起等红灯，一起等雨停，一起在落雪的日子，等我们白首相待</li>
+</ul>
+]]></content>
+      <categories>
+        <category>article</category>
+      </categories>
+      <tags>
+        <tag>摘抄</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>线段树</title>
+    <url>/2022/06/23/%E7%BA%BF%E6%AE%B5%E6%A0%91/</url>
+    <content><![CDATA[<p>线段树模板，持续更新</p>
+<span id="more"></span>
+<h2 id="线段树"><a href="#线段树" class="headerlink" title="线段树"></a>线段树</h2><ul>
+<li>标准线段树（单点修改）</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">5</span>*<span class="number">1e5</span>;</span><br><span class="line"><span class="type">int</span> a[N + <span class="number">5</span>], f[<span class="number">4</span> * N + <span class="number">4</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">buildtree</span><span class="params">(<span class="type">int</span> k, <span class="type">int</span> l, <span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (l == r) &#123;</span><br><span class="line">		f[k] = a[l];</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> m = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">	<span class="built_in">buildtree</span>(k + k, l, m);</span><br><span class="line">	<span class="built_in">buildtree</span>(k + k + <span class="number">1</span>, m + <span class="number">1</span>, r);</span><br><span class="line">	f[k] = f[k + k] + f[k + k + <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> k, <span class="type">int</span> l, <span class="type">int</span> r, <span class="type">int</span> x, <span class="type">int</span> y)</span> </span>&#123;</span><br><span class="line">	f[k] += y;</span><br><span class="line">	<span class="keyword">if</span> (l == r)</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	<span class="type">int</span> m = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span> (x &lt;= m)</span><br><span class="line">		<span class="built_in">add</span>(k + k, l, m, x, y);</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="built_in">add</span>(k + k + <span class="number">1</span>, m + <span class="number">1</span>, r, x, y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">calc</span><span class="params">(<span class="type">int</span> k, <span class="type">int</span> l, <span class="type">int</span> r, <span class="type">int</span> s, <span class="type">int</span> t)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (l == s &amp;&amp; r == t)</span><br><span class="line">		<span class="keyword">return</span> f[k];</span><br><span class="line">	<span class="type">int</span> m = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span> (t &lt;= m)</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">calc</span>(k + k, l, m, s, t);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (s &gt; m)</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">calc</span>(k + k + <span class="number">1</span>, m + <span class="number">1</span>, r, s, t);</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">calc</span>(k + k, l, m, s, m) + <span class="built_in">calc</span>(k + k + <span class="number">1</span>, m + <span class="number">1</span>, r, m+<span class="number">1</span>, t);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> n, m; cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) cin &gt;&gt; a[i];</span><br><span class="line">	<span class="built_in">buildtree</span>(<span class="number">1</span>, <span class="number">1</span>, n);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; ++i) &#123;</span><br><span class="line">		<span class="type">int</span> index; cin &gt;&gt; index;</span><br><span class="line">		<span class="keyword">if</span> (index == <span class="number">1</span>) &#123;</span><br><span class="line">			<span class="type">int</span> x, k; cin &gt;&gt; x &gt;&gt; k;</span><br><span class="line">			<span class="built_in">add</span>(<span class="number">1</span>, <span class="number">1</span>, n, x, k);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="type">int</span> x, y; cin &gt;&gt; x &gt;&gt; y;</span><br><span class="line">			cout &lt;&lt; <span class="built_in">calc</span>(<span class="number">1</span>, <span class="number">1</span>, n, x, y) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>含标记的线段树（未下放）（区间修改）</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1e5</span>+<span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> n,m;<span class="type">long</span> <span class="type">long</span> a[N],f[<span class="number">4</span>*N],v[<span class="number">4</span>*N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">buildtree</span><span class="params">(<span class="type">int</span> k,<span class="type">int</span> l,<span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">	v[k]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(l==r) &#123;</span><br><span class="line">		f[k]=a[l];</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> m=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">	<span class="built_in">buildtree</span>(k+k,l,m);</span><br><span class="line">	<span class="built_in">buildtree</span>(k+k+<span class="number">1</span>,m+<span class="number">1</span>,r);</span><br><span class="line">	f[k]=f[k+k]+f[k+k+<span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">insert</span><span class="params">(<span class="type">int</span> k,<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> x,<span class="type">int</span> y,<span class="type">long</span> <span class="type">long</span> z)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(l==x&amp;&amp;r==y) &#123;</span><br><span class="line">		v[k]+=z;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	f[k]+=(y-x+<span class="number">1</span>)*z;</span><br><span class="line">	<span class="type">int</span> m=(r+l)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(y&lt;=m)</span><br><span class="line">		<span class="built_in">insert</span>(k+k,l,m,x,y,z);</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">if</span>(x&gt;m)</span><br><span class="line">			<span class="built_in">insert</span>(k+k+<span class="number">1</span>,m+<span class="number">1</span>,r,x,y,z);</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="built_in">insert</span>(k+k,l,m,x,m,z),</span><br><span class="line">			<span class="built_in">insert</span>(k+k+<span class="number">1</span>,m+<span class="number">1</span>,r,m+<span class="number">1</span>,y,z);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">long</span> <span class="type">long</span> <span class="title">calc</span><span class="params">(<span class="type">int</span> k,<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> x,<span class="type">int</span> y,<span class="type">long</span> <span class="type">long</span> p)</span> </span>&#123;</span><br><span class="line">	p+=v[k];</span><br><span class="line">	<span class="keyword">if</span>(l==x&amp;&amp;y==r) &#123;</span><br><span class="line">		<span class="keyword">return</span> p*(r-l+<span class="number">1</span>)+f[k];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> m=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(y&lt;=m)</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">calc</span>(k+k,l,m,x,y,p);</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">if</span>(x&gt;m)</span><br><span class="line">			<span class="keyword">return</span> <span class="built_in">calc</span>(k+k+<span class="number">1</span>,m+<span class="number">1</span>,r,x,y,p);</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="keyword">return</span> <span class="built_in">calc</span>(k+k,l,m,x,m,p)+<span class="built_in">calc</span>(k+k+<span class="number">1</span>,m+<span class="number">1</span>,r,m+<span class="number">1</span>,y,p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i) cin&gt;&gt;a[i];</span><br><span class="line">	<span class="built_in">buildtree</span>(<span class="number">1</span>,<span class="number">1</span>,n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;m;++i) &#123;</span><br><span class="line">		<span class="type">int</span> index;cin&gt;&gt;index;</span><br><span class="line">		<span class="keyword">if</span>(index==<span class="number">1</span>) &#123;</span><br><span class="line">			<span class="type">int</span> x,y;cin&gt;&gt;x&gt;&gt;y;<span class="type">long</span> <span class="type">long</span> k;cin&gt;&gt;k;</span><br><span class="line">			<span class="built_in">insert</span>(<span class="number">1</span>,<span class="number">1</span>,n,x,y,k);	</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="type">int</span> x,y;cin&gt;&gt;x&gt;&gt;y;</span><br><span class="line">			cout&lt;&lt;<span class="built_in">calc</span>(<span class="number">1</span>,<span class="number">1</span>,n,x,y,<span class="number">0</span>)&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id=""><a href="#" class="headerlink" title=" "></a> </h2>]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>线段树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>摘抄1</title>
+    <url>/2022/05/03/%E8%BF%9C%E8%B5%B4%E4%BA%BA%E9%97%B4%E6%83%8A%E9%B8%BF%E5%AE%B4%EF%BC%8C%E4%B8%80%E7%9D%B9%E4%BA%BA%E9%97%B4%E7%9B%9B%E4%B8%96%E9%A2%9C/</url>
+    <content><![CDATA[<p><img src="https://s2.loli.net/2022/05/03/rSQUnxjbz5KgBf2.jpg"  width="600"  height = "300" /></p>
+<span id="more"></span>
+<blockquote>
+<p>日落西山非我意，晚霞虽好不及你<br>  黄昏过后月当空，看月相思寄相思<br>                                                              ——《雪中悍刀行》书友锐评</p>
+<p>死亡并不可怕，最可怕的是无意思，那才相当于死。<br>  就像叶子从痛苦的蜷缩中，要用力地伸展一样，<br>  人也要从不假思索地蒙昧里挣脱，这才是活着 。<br>  十年已至，如他所说，不要因为走得太远，忘了我们为什么出发。<br>                                                                                                  ——柴静</p>
+<p>无论面对何种困难与挑战</p>
+<p>人类作为命运共同体</p>
+<p>都应该抛弃偏见团结起来</p>
+<p>在时间的长河中砥砺前行</p>
+<p>​                                                                                    ——《灵笼》</p>
+<p>浩瀚星河我们不过是沧海一粟</p>
+<p>长路漫漫需要毕尽一生来求索</p>
+<p>希望即将踏上考场的你们既有站至最后一刻的决心</p>
+<p>也有张杖芒鞋轻胜马的坦然</p>
+<p>​                                                                            ——天星教育</p>
+<p>说到这里，又想起《月亮与六便士》里的一句话：月亮是那崇高而遥不可及的梦想，六便士是为了生存不得不赚取的卑微收入，多少人知识胆怯得抬头看一眼月亮，又继续低头追索赖以温饱的六便士…希望自己也能有追求梦想，学习自己喜欢的技术的精力吧。</p>
+<p>明天也是怀念张国荣的日子，就用他的一句歌词来向这一段时间道别吧：一切请珍惜，一切将吹散。</p>
+<p>祝福我们都有美好的未来！</p>
+<p>​                                                                                        ——Leetcode网友评论</p>
+</blockquote>
+<hr>
+<h2 id="雪中悍刀行文段摘录"><a href="#雪中悍刀行文段摘录" class="headerlink" title="雪中悍刀行文段摘录"></a>雪中悍刀行文段摘录</h2><ul>
+<li><p>君子之心事，天青日白，不可使人不知；</p>
+<p>君子置才华，玉韫珠藏，不可使人易知。</p>
+</li>
+</ul>
+<ul>
+<li><p>国有利器，不示于人；</p>
+<p>君子藏器，待时而动</p>
+<p>小人藏器，叫嚣不停。</p>
+</li>
+</ul>
+<ul>
+<li>你走到它面前，跟她说，你想要江湖，我便给你一个；你想要江山，我就给你一座。而我呢，就想要个儿子，你给不给？</li>
+</ul>
+<ul>
+<li><p>院中只有一株枇杷树。</p>
+<p>夜幕中，徐骁站在树下，怔怔出神，回到并不宽敞奢华的屋内。屋子简单朴素，外屋有两只衣架，徐骁弯腰从桌底拉出一只箱子，打开以后并非什么奇珍异宝，而是满满一箱子的布鞋。徐骁拿出一双缝到一半的厚底布鞋和针线盒，点燃蜡烛后，娴熟地咬了咬针头，手指缠上针线，开始缝鞋。</p>
+<p>不远处，两个衣架，架着一套将军甲，一件北凉王蟒枹。</p>
+<p>窗外，庭有枇杷树，吾妻死之年所手植也，今已亭亭如盖矣。</p>
+</li>
+</ul>
+<ul>
+<li></li>
+</ul>
+]]></content>
+      <categories>
+        <category>article</category>
+      </categories>
+      <tags>
+        <tag>摘抄</tag>
+      </tags>
+  </entry>
+</search>
