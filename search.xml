@@ -36,6 +36,20 @@
       </tags>
   </entry>
   <entry>
+    <title>cf-787-div3</title>
+    <url>/2022/05/06/cf-787-div3/</url>
+    <content><![CDATA[<blockquote>
+<p>思维，模拟，贪心</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>codeforces</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>cf-785-div2</title>
     <url>/2022/04/30/cf-785-div2/</url>
     <content><![CDATA[<h2 id="题目传送门"><a href="#题目传送门" class="headerlink" title="题目传送门"></a><a href="https://codeforces.com/contest/1673">题目传送门</a></h2><blockquote>
@@ -57,20 +71,6 @@
 <h2 id="D"><a href="#D" class="headerlink" title="D"></a>D</h2><p><strong>thinking</strong></p>
 <p><strong>solution</strong></p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>algorithm</category>
-      </categories>
-      <tags>
-        <tag>codeforces</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>cf-787-div3</title>
-    <url>/2022/05/06/cf-787-div3/</url>
-    <content><![CDATA[<blockquote>
-<p>思维，模拟，贪心</p>
-</blockquote>
 ]]></content>
       <categories>
         <category>algorithm</category>
@@ -102,59 +102,6 @@
       </categories>
       <tags>
         <tag>codeforces</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>dp</title>
-    <url>/2022/06/03/dp/</url>
-    <content><![CDATA[<p>持续更新</p>
-<span id="more"></span>
-<h1 id="背包dp"><a href="#背包dp" class="headerlink" title="背包dp"></a>背包dp</h1><h2 id="01背包"><a href="#01背包" class="headerlink" title="01背包"></a>01背包</h2><p>经典的背包问题：N个物品，容量为V的背包，问最大的装载价值时多少，物品只有一个</p>
-<p><strong>thnking</strong></p>
-<p>我们使用$f[i][j]$来表示当背包体积为j的时候，选取过前i个物品时的背包价值最大值</p>
-<p>所以，状态方程如下：</p>
-<script type="math/tex; mode=display">
-f[0][0]=0;\\
-当我们更新到第i个物品的时候，对于第i个物品的时候，我们有两种选择，选与不选\\
-1、不选 f[i][j]=f[i-1][j]\\
-2、选  f[i][j]=f[i-1][j-v[i]]+w[i]\\
-综上，有
-f[i][j]=max(f[i-1][j],f[i-1][j-v[i]]+w[i])\\
-代码实现如下</script><p>完成了二维数组的dp求解后，我们考虑对空间进行进一步的优化，我们观察到$f[i]的状态只与f[i-1]的状态有关$，因此我们可以将二维数组降到一维数组，我们有更加简洁的代码如下：</p>
-<p><strong>solution</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1010</span>;</span><br><span class="line"><span class="type">int</span> v[N],w[N],f[N][N];</span><br><span class="line"><span class="comment">//f[i][j]的含义是选取第i个物品，口袋体积为j时的最大价值</span></span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i) cin&gt;&gt;v[i]&gt;&gt;w[i];</span><br><span class="line">	f[<span class="number">0</span>][<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;=m;++j) &#123;</span><br><span class="line">			f[i][j]=f[i<span class="number">-1</span>][j];</span><br><span class="line">			<span class="keyword">if</span>(j&gt;=v[i])</span><br><span class="line">				f[i][j]=<span class="built_in">max</span>(f[i][j],f[i<span class="number">-1</span>][j-v[i]]+w[i]);</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="type">int</span> ans=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;=m;++i) &#123;</span><br><span class="line">		ans=<span class="built_in">max</span>(ans,f[n][i]);</span><br><span class="line">	&#125;	</span><br><span class="line">	</span><br><span class="line">	cout&lt;&lt;ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1010</span>;</span><br><span class="line"><span class="type">int</span> v[N],w[N],f[N];</span><br><span class="line"><span class="comment">//f[j]的含义是口袋体积是j时的最大价值</span></span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i) cin&gt;&gt;v[i]&gt;&gt;w[i];</span><br><span class="line">    f[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i) </span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=m;j&gt;=<span class="number">0</span>;j--)</span><br><span class="line">            f[j]=<span class="built_in">max</span>(f[j],f[j-v[i]]+w[i]);</span><br><span class="line">    <span class="comment">//我们对每一次的物品选取进行考虑，</span></span><br><span class="line">    <span class="comment">//这一句的状态转换方程的含义是指当我们决定是否选择第i个物品的时候，(此时f[j]中存放的都是选取过i-1的最大价值)</span></span><br><span class="line">    <span class="comment">//我们考虑是否加入这个物品，就是两种情况：</span></span><br><span class="line">    <span class="comment">//1.不加，那么背包体积不变，即是f[j]</span></span><br><span class="line">    <span class="comment">//2.加，从背包中腾出v[i]的体积放入，腾出v[i]的体积放入该物品，</span></span><br><span class="line">    <span class="comment">//对应的剩下的体积，我们选择存放更多的价值,即是f[j-v[i]]+w[i]</span></span><br><span class="line">    cout&lt;&lt;f[m];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">这里会有一个疑问：第10行进行正序的循环行不行？</span></span><br><span class="line"><span class="comment">答:不行，我们知道，计算f[j]的时候，需要用到f[j-v[i]]的结果，理论上，这里的f[j-v[i]]就是i-1的情况下的价值，如果进行正序遍历的话，这里就是第i个了，就会发生错误。</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-<h2 id="完全背包"><a href="#完全背包" class="headerlink" title="完全背包"></a>完全背包</h2><p>经典的背包问题：N个物品，容量为V的背包，问最大的装载价值是多少，每种物品都有无限个</p>
-<p><strong>thinking</strong></p>
-<p>我们直接对代码进行讲解。</p>
-<p><strong>solution</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1010</span>;</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="type">int</span> v[N],w[N],f[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i)cin&gt;&gt;v[i]&gt;&gt;w[i];</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i) </span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=v[i];j&lt;=m;++j)</span><br><span class="line">			f[j]=<span class="built_in">max</span>(f[j],f[j-v[i]]+w[i]);</span><br><span class="line">    <span class="comment">/*该种情况下，状态转移方程并没有发生变化，唯一的变化就是内层循环的循环顺序被我们调换了一下，我们考虑这种做法的正确性</span></span><br><span class="line"><span class="comment">    区别于01背包，01背包的物品只有一个，我们采用倒序的方式对f[j]进行更新。但是在多重背包中，物品的数量不限</span></span><br><span class="line"><span class="comment">    因此，我们考虑第i个物品的时候，我们会有拿多少的考虑，采用正序的循环，我们将背包的体积逐渐扩大，隐含地将物品无限选取加了去</span></span><br><span class="line"><span class="comment">    对于第i个物品来说，放入一个，即是j=v[i]，进而体积一步步地进行扩大，当体积能够装下打两个的时候，再次进行更新为腾出v[i]的	状态的背包最大值加上放入物品的最大值，进而更新得到最大值。</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">	cout&lt;&lt;f[m];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//考虑到循环的特殊性，我们同时也可以将存放体积与价值的数组一并去掉</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1010</span>;</span><br><span class="line"><span class="type">int</span> f[N];</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i) &#123;</span><br><span class="line">        <span class="type">int</span> v,w;cin&gt;&gt;v&gt;&gt;w;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=v;j&lt;=m;++j) &#123;</span><br><span class="line">            f[j]=<span class="built_in">max</span>(f[j],f[j-v]+w);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;f[m];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="多重背包"><a href="#多重背包" class="headerlink" title="多重背包"></a>多重背包</h2><p>多重背包的题设在01背包以及完全背包的基础上，再加以限制，具体如下：</p>
-<h3 id="多重背包1"><a href="#多重背包1" class="headerlink" title="多重背包1"></a>多重背包1</h3><p>对于n件物品，每一种物品有$s_i$个，体积为$v_i$,$w_i$，对于体积为V的背包来说，能够装下的物品的最大价值是多少</p>
-<p><strong>thinking</strong></p>
-<p>同理，该种情况下的选择，对比于01背包的状态转移方程，我们只需要改动一下每次比较的最大个数即可，即是</p>
-<script type="math/tex; mode=display">
-在每一次的内层循环之中，我们再加入一层循环来表示物品的个数k\\
-f[j]=max(f[j],f[j-k*v[i]]+k*w[i])</script><p><strong>solution</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1010</span>;</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="type">int</span> v[N],w[N],f[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i) &#123;</span><br><span class="line">		<span class="type">int</span> v,w,s;cin&gt;&gt;v&gt;&gt;w&gt;&gt;s;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=m;j&gt;=v;--j)</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">1</span>;k&lt;=s&amp;&amp;k*v&lt;=j;++k)</span><br><span class="line">				f[j]=<span class="built_in">max</span>(f[j],f[j-k*v]+k*w);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;f[m];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="多重背包2"><a href="#多重背包2" class="headerlink" title="多重背包2"></a>多重背包2</h3><p>下面，我们考虑多重背包的优化问题，在问题1中，我们使用$O(n^3)$的复杂度去进行计算，但是当n的数据范围变大的时候，此种复杂度就比较高了，下面我们考虑相关优化技巧——多重背包的二进制优化方法</p>
-<p>我们可以看到，多重背包的解题思路与01背包是近似的，我们思考能否用01背包进行求解——我们将一个物品($s_i$个)改成$s_i$个独立物品，那么，就相当于多了几个不一样的相同体积和价值的物品对所有的物品执行这样操作，那么得到的物品就可以直接使用01背包进行求解。但是，这样做并没有有降低题目的复杂度，我们必须换一种思考方式。</p>
-<p>我们先从一个小小的题目出发，给定一个整数s，如何用最少的整数，使得每个整数的取与不取两种状态，可以完全表示1-s的所有整数，我们先考虑$2^n-1$，比如说7</p>
-<script type="math/tex; mode=display">
-那么我们可以选取1,2,4，来满足这种情况，则有\\
-1=1\quad2=2\quad3=1+2\quad4=4\quad5=1+5\quad6=2+4\quad7=1+2+4</script><p>这样，我们完成了用三个数来代替7，我们再考虑不为2的整次幂-1的情况下，如果，我们仍然采取选择二进制位的话，选取数字就会溢出。</p>
-<script type="math/tex; mode=display">
-10\quad->1\quad2\quad4\quad8，比如此时，我们显然不能这样表示，那么我们这样表示：10-1-2-4=3,我们用1，2,3,4,来进行表示\\
-有7的例子我可以知道1,2,4可以表示1-7，那么，我们计入3后，就可以表示1-10。</script><p>这样，我们就得到了标准的拆分方法，对于一个整数s，对它一直减去2的整幂操作，直到它小于0，那么剩下的余数就是我们需要的数。</p>
-<p>回到本题，我们对s个物品也可以进行这样的拆分，就可以表示1-s的任意一种选取方案，而我们将复杂度降到了O(logn)。下面就是具体的操作代码：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="type">int</span> f[<span class="number">2010</span>];</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Good</span> &#123;</span><br><span class="line">	<span class="type">int</span> v,w;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> m,n;cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	vector&lt;Good&gt; goods;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i) &#123;</span><br><span class="line">		<span class="type">int</span> v,w,s;</span><br><span class="line">		cin&gt;&gt;v&gt;&gt;w&gt;&gt;s;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">1</span>;k&lt;=s;++k) &#123;</span><br><span class="line">			s-=k;</span><br><span class="line">			goods.<span class="built_in">push_back</span>(&#123;v*k,w*k&#125;);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(s&gt;<span class="number">0</span>) goods.<span class="built_in">push_back</span>(&#123;v*s,w*s&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> good:goods) &#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=m;j&gt;=good.v;--j) &#123;</span><br><span class="line">			f[j]=<span class="built_in">max</span>(f[j],f[j-good.v]+good.w);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;f[m]&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>algorithm</category>
-      </categories>
-      <tags>
-        <tag>dp</tag>
       </tags>
   </entry>
   <entry>
@@ -217,6 +164,59 @@ f[j]=max(f[j],f[j-k*v[i]]+k*w[i])</script><p><strong>solution</strong></p>
       </categories>
       <tags>
         <tag>math</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>dp</title>
+    <url>/2022/06/03/dp/</url>
+    <content><![CDATA[<p>持续更新</p>
+<span id="more"></span>
+<h1 id="背包dp"><a href="#背包dp" class="headerlink" title="背包dp"></a>背包dp</h1><h2 id="01背包"><a href="#01背包" class="headerlink" title="01背包"></a>01背包</h2><p>经典的背包问题：N个物品，容量为V的背包，问最大的装载价值时多少，物品只有一个</p>
+<p><strong>thnking</strong></p>
+<p>我们使用$f[i][j]$来表示当背包体积为j的时候，选取过前i个物品时的背包价值最大值</p>
+<p>所以，状态方程如下：</p>
+<script type="math/tex; mode=display">
+f[0][0]=0;\\
+当我们更新到第i个物品的时候，对于第i个物品的时候，我们有两种选择，选与不选\\
+1、不选 f[i][j]=f[i-1][j]\\
+2、选  f[i][j]=f[i-1][j-v[i]]+w[i]\\
+综上，有
+f[i][j]=max(f[i-1][j],f[i-1][j-v[i]]+w[i])\\
+代码实现如下</script><p>完成了二维数组的dp求解后，我们考虑对空间进行进一步的优化，我们观察到$f[i]的状态只与f[i-1]的状态有关$，因此我们可以将二维数组降到一维数组，我们有更加简洁的代码如下：</p>
+<p><strong>solution</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1010</span>;</span><br><span class="line"><span class="type">int</span> v[N],w[N],f[N][N];</span><br><span class="line"><span class="comment">//f[i][j]的含义是选取第i个物品，口袋体积为j时的最大价值</span></span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i) cin&gt;&gt;v[i]&gt;&gt;w[i];</span><br><span class="line">	f[<span class="number">0</span>][<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;=m;++j) &#123;</span><br><span class="line">			f[i][j]=f[i<span class="number">-1</span>][j];</span><br><span class="line">			<span class="keyword">if</span>(j&gt;=v[i])</span><br><span class="line">				f[i][j]=<span class="built_in">max</span>(f[i][j],f[i<span class="number">-1</span>][j-v[i]]+w[i]);</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="type">int</span> ans=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;=m;++i) &#123;</span><br><span class="line">		ans=<span class="built_in">max</span>(ans,f[n][i]);</span><br><span class="line">	&#125;	</span><br><span class="line">	</span><br><span class="line">	cout&lt;&lt;ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1010</span>;</span><br><span class="line"><span class="type">int</span> v[N],w[N],f[N];</span><br><span class="line"><span class="comment">//f[j]的含义是口袋体积是j时的最大价值</span></span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i) cin&gt;&gt;v[i]&gt;&gt;w[i];</span><br><span class="line">    f[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i) </span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=m;j&gt;=<span class="number">0</span>;j--)</span><br><span class="line">            f[j]=<span class="built_in">max</span>(f[j],f[j-v[i]]+w[i]);</span><br><span class="line">    <span class="comment">//我们对每一次的物品选取进行考虑，</span></span><br><span class="line">    <span class="comment">//这一句的状态转换方程的含义是指当我们决定是否选择第i个物品的时候，(此时f[j]中存放的都是选取过i-1的最大价值)</span></span><br><span class="line">    <span class="comment">//我们考虑是否加入这个物品，就是两种情况：</span></span><br><span class="line">    <span class="comment">//1.不加，那么背包体积不变，即是f[j]</span></span><br><span class="line">    <span class="comment">//2.加，从背包中腾出v[i]的体积放入，腾出v[i]的体积放入该物品，</span></span><br><span class="line">    <span class="comment">//对应的剩下的体积，我们选择存放更多的价值,即是f[j-v[i]]+w[i]</span></span><br><span class="line">    cout&lt;&lt;f[m];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">这里会有一个疑问：第10行进行正序的循环行不行？</span></span><br><span class="line"><span class="comment">答:不行，我们知道，计算f[j]的时候，需要用到f[j-v[i]]的结果，理论上，这里的f[j-v[i]]就是i-1的情况下的价值，如果进行正序遍历的话，这里就是第i个了，就会发生错误。</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="完全背包"><a href="#完全背包" class="headerlink" title="完全背包"></a>完全背包</h2><p>经典的背包问题：N个物品，容量为V的背包，问最大的装载价值是多少，每种物品都有无限个</p>
+<p><strong>thinking</strong></p>
+<p>我们直接对代码进行讲解。</p>
+<p><strong>solution</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1010</span>;</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="type">int</span> v[N],w[N],f[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i)cin&gt;&gt;v[i]&gt;&gt;w[i];</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i) </span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=v[i];j&lt;=m;++j)</span><br><span class="line">			f[j]=<span class="built_in">max</span>(f[j],f[j-v[i]]+w[i]);</span><br><span class="line">    <span class="comment">/*该种情况下，状态转移方程并没有发生变化，唯一的变化就是内层循环的循环顺序被我们调换了一下，我们考虑这种做法的正确性</span></span><br><span class="line"><span class="comment">    区别于01背包，01背包的物品只有一个，我们采用倒序的方式对f[j]进行更新。但是在多重背包中，物品的数量不限</span></span><br><span class="line"><span class="comment">    因此，我们考虑第i个物品的时候，我们会有拿多少的考虑，采用正序的循环，我们将背包的体积逐渐扩大，隐含地将物品无限选取加了去</span></span><br><span class="line"><span class="comment">    对于第i个物品来说，放入一个，即是j=v[i]，进而体积一步步地进行扩大，当体积能够装下打两个的时候，再次进行更新为腾出v[i]的	状态的背包最大值加上放入物品的最大值，进而更新得到最大值。</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">	cout&lt;&lt;f[m];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//考虑到循环的特殊性，我们同时也可以将存放体积与价值的数组一并去掉</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1010</span>;</span><br><span class="line"><span class="type">int</span> f[N];</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i) &#123;</span><br><span class="line">        <span class="type">int</span> v,w;cin&gt;&gt;v&gt;&gt;w;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=v;j&lt;=m;++j) &#123;</span><br><span class="line">            f[j]=<span class="built_in">max</span>(f[j],f[j-v]+w);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;f[m];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="多重背包"><a href="#多重背包" class="headerlink" title="多重背包"></a>多重背包</h2><p>多重背包的题设在01背包以及完全背包的基础上，再加以限制，具体如下：</p>
+<h3 id="多重背包1"><a href="#多重背包1" class="headerlink" title="多重背包1"></a>多重背包1</h3><p>对于n件物品，每一种物品有$s_i$个，体积为$v_i$,$w_i$，对于体积为V的背包来说，能够装下的物品的最大价值是多少</p>
+<p><strong>thinking</strong></p>
+<p>同理，该种情况下的选择，对比于01背包的状态转移方程，我们只需要改动一下每次比较的最大个数即可，即是</p>
+<script type="math/tex; mode=display">
+在每一次的内层循环之中，我们再加入一层循环来表示物品的个数k\\
+f[j]=max(f[j],f[j-k*v[i]]+k*w[i])</script><p><strong>solution</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1010</span>;</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="type">int</span> v[N],w[N],f[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i) &#123;</span><br><span class="line">		<span class="type">int</span> v,w,s;cin&gt;&gt;v&gt;&gt;w&gt;&gt;s;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=m;j&gt;=v;--j)</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">1</span>;k&lt;=s&amp;&amp;k*v&lt;=j;++k)</span><br><span class="line">				f[j]=<span class="built_in">max</span>(f[j],f[j-k*v]+k*w);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;f[m];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="多重背包2"><a href="#多重背包2" class="headerlink" title="多重背包2"></a>多重背包2</h3><p>下面，我们考虑多重背包的优化问题，在问题1中，我们使用$O(n^3)$的复杂度去进行计算，但是当n的数据范围变大的时候，此种复杂度就比较高了，下面我们考虑相关优化技巧——多重背包的二进制优化方法</p>
+<p>我们可以看到，多重背包的解题思路与01背包是近似的，我们思考能否用01背包进行求解——我们将一个物品($s_i$个)改成$s_i$个独立物品，那么，就相当于多了几个不一样的相同体积和价值的物品对所有的物品执行这样操作，那么得到的物品就可以直接使用01背包进行求解。但是，这样做并没有有降低题目的复杂度，我们必须换一种思考方式。</p>
+<p>我们先从一个小小的题目出发，给定一个整数s，如何用最少的整数，使得每个整数的取与不取两种状态，可以完全表示1-s的所有整数，我们先考虑$2^n-1$，比如说7</p>
+<script type="math/tex; mode=display">
+那么我们可以选取1,2,4，来满足这种情况，则有\\
+1=1\quad2=2\quad3=1+2\quad4=4\quad5=1+5\quad6=2+4\quad7=1+2+4</script><p>这样，我们完成了用三个数来代替7，我们再考虑不为2的整次幂-1的情况下，如果，我们仍然采取选择二进制位的话，选取数字就会溢出。</p>
+<script type="math/tex; mode=display">
+10\quad->1\quad2\quad4\quad8，比如此时，我们显然不能这样表示，那么我们这样表示：10-1-2-4=3,我们用1，2,3,4,来进行表示\\
+有7的例子我可以知道1,2,4可以表示1-7，那么，我们计入3后，就可以表示1-10。</script><p>这样，我们就得到了标准的拆分方法，对于一个整数s，对它一直减去2的整幂操作，直到它小于0，那么剩下的余数就是我们需要的数。</p>
+<p>回到本题，我们对s个物品也可以进行这样的拆分，就可以表示1-s的任意一种选取方案，而我们将复杂度降到了O(logn)。下面就是具体的操作代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="type">int</span> f[<span class="number">2010</span>];</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Good</span> &#123;</span><br><span class="line">	<span class="type">int</span> v,w;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> m,n;cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	vector&lt;Good&gt; goods;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i) &#123;</span><br><span class="line">		<span class="type">int</span> v,w,s;</span><br><span class="line">		cin&gt;&gt;v&gt;&gt;w&gt;&gt;s;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">1</span>;k&lt;=s;++k) &#123;</span><br><span class="line">			s-=k;</span><br><span class="line">			goods.<span class="built_in">push_back</span>(&#123;v*k,w*k&#125;);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(s&gt;<span class="number">0</span>) goods.<span class="built_in">push_back</span>(&#123;v*s,w*s&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> good:goods) &#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=m;j&gt;=good.v;--j) &#123;</span><br><span class="line">			f[j]=<span class="built_in">max</span>(f[j],f[j-good.v]+good.w);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;f[m]&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>dp</tag>
       </tags>
   </entry>
   <entry>
