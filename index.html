@@ -156,7 +156,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -167,7 +167,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -330,9 +330,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2022-06-09 10:41:38 / Modified: 11:47:59" itemprop="dateCreated datePublished" datetime="2022-06-09T10:41:38+08:00">2022-06-09</time>
+      <time title="Created: 2022-06-09 10:41:38" itemprop="dateCreated datePublished" datetime="2022-06-09T10:41:38+08:00">2022-06-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-07-03 16:35:38" itemprop="dateModified" datetime="2022-07-03T16:35:38+08:00">2022-07-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -566,104 +572,6 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://shengdaozm.com/2022/05/09/cf-789-div2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/1.jpg">
-      <meta itemprop="name" content="圣道">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sheng Dao">
-      <meta itemprop="description" content="言念君子，温其如玉">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sheng Dao">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/09/cf-789-div2/" class="post-title-link" itemprop="url">cf-789-div2</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-05-09 17:47:27" itemprop="dateCreated datePublished" datetime="2022-05-09T17:47:27+08:00">2022-05-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-20 10:26:40" itemprop="dateModified" datetime="2022-05-20T10:26:40+08:00">2022-05-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>思维、</p>
-</blockquote>
-<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1678/problems">题目传送门</a></p>
-<!---more-->
-<h2 id="A"><a href="#A" class="headerlink" title="A"></a>A</h2><p><strong>thinking</strong></p>
-<p><strong>solution</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n;cin&gt;&gt;n;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">a</span><span class="params">(n)</span></span>;</span><br><span class="line">    <span class="type">int</span> zero=<span class="number">0</span>;</span><br><span class="line">    unordered_set&lt;<span class="type">int</span>&gt;s;</span><br><span class="line">    <span class="type">bool</span> ok=<span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i) &#123;</span><br><span class="line">    	cin&gt;&gt;a[i];</span><br><span class="line">    	<span class="keyword">if</span>(s.<span class="built_in">count</span>(a[i])) ok=<span class="literal">true</span>;</span><br><span class="line">    	<span class="keyword">else</span> s.<span class="built_in">insert</span>(a[i]);</span><br><span class="line">    	<span class="keyword">if</span>(a[i]==<span class="number">0</span>) ++zero;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(zero&gt;<span class="number">0</span>) &#123;</span><br><span class="line">    	cout&lt;&lt;n-zero&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    	<span class="keyword">if</span>(ok) cout&lt;&lt;n&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    	<span class="keyword">else</span> cout&lt;&lt;n+<span class="number">1</span>&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="B"><a href="#B" class="headerlink" title="B"></a>B</h2><p><strong>thinking</strong></p>
-<p><strong>solution</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> n;string s;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    cin &gt;&gt; s;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">0</span>, y = <span class="number">0</span>;</span><br><span class="line">    <span class="type">char</span> pre = <span class="string">&#x27;?&#x27;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">length</span>(); i += <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s[i] != s[i + <span class="number">1</span>])x++;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (pre != s[i])y++;</span><br><span class="line">            pre = s[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; x &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; <span class="built_in">max</span>(<span class="number">1</span>, y) &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="C"><a href="#C" class="headerlink" title="C"></a>C</h2><p><strong>thinking</strong></p>
-<p><strong>solution</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n;cin&gt;&gt;n;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">a</span><span class="params">(n)</span></span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i) cin&gt;&gt;a[i];</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">pre</span>(n,<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(<span class="number">5001</span>,<span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i) &#123;</span><br><span class="line">    	<span class="keyword">if</span>(i==<span class="number">0</span>) &#123;</span><br><span class="line">    		<span class="keyword">for</span>(<span class="type">int</span> j=a[i];j&lt;=n;++j) pre[i][j]++;</span><br><span class="line">    	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    		<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=n;++j) pre[i][j]+=pre[i<span class="number">-1</span>][j];</span><br><span class="line">    		<span class="keyword">for</span>(<span class="type">int</span> j=a[i];j&lt;=n;++j) pre[i][j]++;</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//枚举bc的情况，</span></span><br><span class="line">	ll ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> b=<span class="number">1</span>;b&lt;n;++b) &#123;</span><br><span class="line">    	<span class="keyword">for</span>(<span class="type">int</span> c=b+<span class="number">1</span>;c&lt;n;++c) &#123;</span><br><span class="line">    		<span class="comment">//[0,b-1]-&gt;小于pc的个数</span></span><br><span class="line">    		<span class="comment">//[c+1,n-1]-&gt;小于pb的个数</span></span><br><span class="line">    		ans+=(ll)pre[b<span class="number">-1</span>][a[c]<span class="number">-1</span>]*(pre[n<span class="number">-1</span>][a[b]<span class="number">-1</span>]-pre[c][a[b]<span class="number">-1</span>]);</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;ans&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://shengdaozm.com/2022/05/09/%E5%89%91%E6%8C%91%E6%98%9F%E6%B2%B3%E8%90%BD%E7%B9%81%E6%98%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -707,87 +615,6 @@
     
     <div class="post-body" itemprop="articleBody">
           
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://shengdaozm.com/2022/05/06/cf-787-div3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/1.jpg">
-      <meta itemprop="name" content="圣道">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sheng Dao">
-      <meta itemprop="description" content="言念君子，温其如玉">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sheng Dao">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/06/cf-787-div3/" class="post-title-link" itemprop="url">cf-787-div3</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2022-05-06 08:15:59 / Modified: 08:17:49" itemprop="dateCreated datePublished" datetime="2022-05-06T08:15:59+08:00">2022-05-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>思维，模拟，贪心</p>
-</blockquote>
-
       
     </div>
 
@@ -875,100 +702,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/03/%E8%BF%9C%E8%B5%B4%E4%BA%BA%E9%97%B4%E6%83%8A%E9%B8%BF%E5%AE%B4%EF%BC%8C%E4%B8%80%E7%9D%B9%E4%BA%BA%E9%97%B4%E7%9B%9B%E4%B8%96%E9%A2%9C/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://shengdaozm.com/2022/04/30/cf-785-div2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/1.jpg">
-      <meta itemprop="name" content="圣道">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sheng Dao">
-      <meta itemprop="description" content="言念君子，温其如玉">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sheng Dao">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/30/cf-785-div2/" class="post-title-link" itemprop="url">cf-785-div2</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-04-30 23:08:29" itemprop="dateCreated datePublished" datetime="2022-04-30T23:08:29+08:00">2022-04-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-02 23:51:00" itemprop="dateModified" datetime="2022-05-02T23:51:00+08:00">2022-05-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="题目传送门"><a href="#题目传送门" class="headerlink" title="题目传送门"></a><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1673">题目传送门</a></h2><blockquote>
-<p>思维,字符串,背包,</p>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/04/30/cf-785-div2/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

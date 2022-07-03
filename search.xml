@@ -9,7 +9,7 @@
 <p>免责声明：更多的操作请访问<a href="https://git.oschina.net/progit/">git pro</a></p>
 </blockquote>
 <h1 id="前置操作"><a href="#前置操作" class="headerlink" title="前置操作"></a>前置操作</h1><p>​        在进行git的基础操作之前，我们首先将隐藏文件打开。在任意文件夹的上面打开查看-&gt;显示-&gt;显示隐藏文件即可。</p>
-<h1 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h1><h2 id="个人信息绑定"><a href="#个人信息绑定" class="headerlink" title="个人信息绑定"></a>个人信息绑定</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name（&quot;username&quot;</span><br><span class="line">git config --global user.email useremail@ai.com</span><br></pre></td></tr></table></figure>
+<h1 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h1><h2 id="个人信息绑定"><a href="#个人信息绑定" class="headerlink" title="个人信息绑定"></a>个人信息绑定</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;username&quot;</span><br><span class="line">git config --global user.email useremail@ai.com</span><br></pre></td></tr></table></figure>
 <h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><ul>
 <li>如果我们执行从github克隆代码，执行如下命令</li>
 </ul>
@@ -27,81 +27,42 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git add . %添加所有文件到缓存区</span><br><span class="line">git add xxxx %添加某一个文件</span><br><span class="line">%一般偷懒就直接执行第一个命令</span><br><span class="line"></span><br><span class="line">git commit -m &quot;string&quot; %输入一个string（字符串）的提交说明</span><br><span class="line"></span><br><span class="line">git push -u gitssh %输入对应的仓库ssh即可，完成对应的代码提交</span><br></pre></td></tr></table></figure>
 <p>可以将上述的文件编写成<code>.bat</code>脚本，每次点击一下即可完成提交。比如，下面即使，我第一次使用git用的</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd xxxxxx</span><br><span class="line">git add .</span><br><span class="line">set /p s=</span><br><span class="line">git commit -m %s%</span><br><span class="line">git pus -u gitssh</span><br><span class="line">@pause</span><br></pre></td></tr></table></figure>
+<h1 id="git修改hosts"><a href="#git修改hosts" class="headerlink" title="git修改hosts"></a>git修改hosts</h1><p><a href="https://blog.csdn.net/weixin_44282947/article/details/117756501">此部分鸣谢</a></p>
+<p>起因：</p>
+<blockquote>
+<p>当我从学校回家的时候，突然发现我的github连接不上了，查了好多的博客，心力憔悴，突然，看到一篇博客帮我解决了这样的问题，(开心！又可以push了)。</p>
+</blockquote>
+<p>状况：</p>
+<p>进行<code>git clone xxx</code>的时候，出现</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Failed connect to github.com:<span class="number">443</span>； Connection refused</span><br></pre></td></tr></table></figure>
+<p>进行<code>git push</code>的时候，又出现<code>port 22</code> 拒绝访问，令人心急如焚。</p>
+<hr>
+<ul>
+<li><strong>解决方案一：</strong>（本方案，本人执行无效）重置代理或者取消代理</li>
+</ul>
+<p>依次执行下述命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git config --global http.proxy &#x27;socks5://127.0.0.1:1080&#x27;</span><br><span class="line">git config --global https.proxy &#x27;socks5://127.0.0.1:1080&#x27;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git config --global --unset http.proxy</span><br><span class="line">git config --global --unset https.proxy</span><br></pre></td></tr></table></figure>
+<p>再次重复操作的时候，发现报错没有任何的变化，失败</p>
+<ul>
+<li><strong>解决方案二：</strong>git修改hosts</li>
+</ul>
+<p>点击<a href="https://www.ipaddress.com/">链接</a>，输入查询</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">github.com</span><br></pre></td></tr></table></figure>
+<p>查询ip地址，得到140.82.114.4（可以自己去查询一下）</p>
+<p>依照我的电脑为例</p>
+<p>访问</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">C:\Windows\System32\drivers\etc</span><br></pre></td></tr></table></figure>
+<p>此文件下的<code>hosts</code>文件，里面的内容不用管，请再加一行</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">140.82.114.4        github.com</span><br></pre></td></tr></table></figure>
+<p><strong>原因：</strong> <a href="https://so.csdn.net/so/search?q=github&amp;spm=1001.2101.3001.7020">github</a> 的一些域名的 <strong>DNS 解析被污染</strong>，导致DNS 解析过程无法通过域名取得正确的IP地址</p>
+<p>保存后，执行自己的命令就恢复正常啦！</p>
 ]]></content>
       <categories>
         <category>指南</category>
       </categories>
       <tags>
         <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>cf-787-div3</title>
-    <url>/2022/05/06/cf-787-div3/</url>
-    <content><![CDATA[<blockquote>
-<p>思维，模拟，贪心</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>algorithm</category>
-      </categories>
-      <tags>
-        <tag>codeforces</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>cf-785-div2</title>
-    <url>/2022/04/30/cf-785-div2/</url>
-    <content><![CDATA[<h2 id="题目传送门"><a href="#题目传送门" class="headerlink" title="题目传送门"></a><a href="https://codeforces.com/contest/1673">题目传送门</a></h2><blockquote>
-<p>思维,字符串,背包,</p>
-</blockquote>
-<span id="more"></span>
-<h2 id="A"><a href="#A" class="headerlink" title="A"></a>A</h2><p><strong>thinking</strong></p>
-<p>贪心，对于Alice来说，字符串的长度为偶数就取完；为奇数，就只留一个</p>
-<p><strong>solution</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    string s;cin&gt;&gt;s;</span><br><span class="line">    <span class="comment">//Alice --偶数</span></span><br><span class="line">    <span class="comment">//Bob --奇数</span></span><br><span class="line">    <span class="type">int</span> n=s.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">if</span>(n%<span class="number">2</span>==<span class="number">0</span>) &#123;</span><br><span class="line">    	<span class="type">int</span> sum=<span class="number">0</span>;</span><br><span class="line">    	<span class="keyword">for</span>(<span class="keyword">auto</span> &amp;x:s) sum+=x-<span class="string">&#x27;a&#x27;</span>+<span class="number">1</span>;</span><br><span class="line">    		cout&lt;&lt;<span class="string">&quot;Alice &quot;</span>&lt;&lt;sum&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    	<span class="keyword">if</span>(s[<span class="number">0</span>]&gt;s[n<span class="number">-1</span>]) &#123;</span><br><span class="line">    		<span class="comment">//前面一个大</span></span><br><span class="line">    		<span class="type">int</span> sum=<span class="number">0</span>;</span><br><span class="line">    		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n<span class="number">-1</span>;++i) sum+=s[i]-<span class="string">&#x27;a&#x27;</span>+<span class="number">1</span>;</span><br><span class="line">    		<span class="keyword">if</span>(sum&gt;s[n<span class="number">-1</span>]-<span class="string">&#x27;a&#x27;</span>+<span class="number">1</span>) &#123;</span><br><span class="line">    			cout&lt;&lt;<span class="string">&quot;Alice &quot;</span>&lt;&lt;sum-(s[n<span class="number">-1</span>]-<span class="string">&#x27;a&#x27;</span>+<span class="number">1</span>)&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    			cout&lt;&lt;<span class="string">&quot;Bob &quot;</span>&lt;&lt;s[n<span class="number">-1</span>]-<span class="string">&#x27;a&#x27;</span>+<span class="number">1</span>-sum&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    		&#125;</span><br><span class="line">    	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    		<span class="type">int</span> sum=<span class="number">0</span>;</span><br><span class="line">    		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;n;++i) sum+=s[i]-<span class="string">&#x27;a&#x27;</span>+<span class="number">1</span>;</span><br><span class="line">    		<span class="keyword">if</span>(sum&gt;s[n<span class="number">-1</span>]-<span class="string">&#x27;a&#x27;</span>+<span class="number">1</span>) &#123;</span><br><span class="line">    			cout&lt;&lt;<span class="string">&quot;Alice &quot;</span>&lt;&lt;sum-(s[<span class="number">0</span>]-<span class="string">&#x27;a&#x27;</span>+<span class="number">1</span>)&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    			cout&lt;&lt;<span class="string">&quot;Bob &quot;</span>&lt;&lt;s[<span class="number">0</span>]-<span class="string">&#x27;a&#x27;</span>+<span class="number">1</span>-sum&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    		&#125;</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="B"><a href="#B" class="headerlink" title="B"></a>B</h2><p><strong>thinking</strong></p>
-<p>如题，对于题目中任意两个不同的字母，在s的字串中如果存在频次相差大于1的情况，就是错的，反之，就是对的。<br>我们可以这样去考虑，对于s的每一个不同类型的字符，我们只需要找到不含有它的字串，查找是否存在出现的频次大于等于2的字符存在即可，最终可以得到答案。</p>
-<p><strong>solution</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">check</span><span class="params">(<span class="type">int</span> x,string &amp;s)</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> c[<span class="number">26</span>];</span><br><span class="line">	<span class="type">int</span> n=s.<span class="built_in">size</span>();</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i) &#123;</span><br><span class="line">		<span class="keyword">if</span>(s[i]-<span class="string">&#x27;a&#x27;</span>==x) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="built_in">memset</span>(c,<span class="number">0</span>,<span class="built_in">sizeof</span>(c));</span><br><span class="line">		<span class="type">int</span> j=i;</span><br><span class="line">		c[s[i]-<span class="string">&#x27;a&#x27;</span>]++;</span><br><span class="line">		<span class="keyword">while</span>(j+<span class="number">1</span>&lt;n&amp;&amp;s[j+<span class="number">1</span>]-<span class="string">&#x27;a&#x27;</span>!=x) &#123;</span><br><span class="line">			++j;</span><br><span class="line">			<span class="keyword">if</span>(++c[s[j]-<span class="string">&#x27;a&#x27;</span>]&gt;<span class="number">1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		i=j;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    string s;cin&gt;&gt;s;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">cnt</span><span class="params">(<span class="number">26</span>,<span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="type">int</span> n=s.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i) ++cnt[s[i]-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">26</span>;++i) &#123;</span><br><span class="line">    	<span class="keyword">if</span>(cnt[i]&amp;&amp;!<span class="built_in">check</span>(i,s)) &#123;</span><br><span class="line">    		cout&lt;&lt;<span class="string">&quot;NO&quot;</span>&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    		<span class="keyword">return</span>;</span><br><span class="line">    	&#125; </span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;YES&quot;</span>&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="C"><a href="#C" class="headerlink" title="C"></a>C</h2><p><strong>thinking</strong></p>
-<p>显然，题目要求查找回文串，我们提前预处理对应的回文数字，剩下的对于每一个数字，问题转变成了完全背包求方案数的问题，即可得到解决。</p>
-<p><strong>solution</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="D"><a href="#D" class="headerlink" title="D"></a>D</h2><p><strong>thinking</strong></p>
-<p><strong>solution</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>algorithm</category>
-      </categories>
-      <tags>
-        <tag>codeforces</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>cf-789-div2</title>
-    <url>/2022/05/09/cf-789-div2/</url>
-    <content><![CDATA[<blockquote>
-<p>思维、</p>
-</blockquote>
-<p><a href="https://codeforces.com/contest/1678/problems">题目传送门</a></p>
-<!---more-->
-<h2 id="A"><a href="#A" class="headerlink" title="A"></a>A</h2><p><strong>thinking</strong></p>
-<p><strong>solution</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n;cin&gt;&gt;n;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">a</span><span class="params">(n)</span></span>;</span><br><span class="line">    <span class="type">int</span> zero=<span class="number">0</span>;</span><br><span class="line">    unordered_set&lt;<span class="type">int</span>&gt;s;</span><br><span class="line">    <span class="type">bool</span> ok=<span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i) &#123;</span><br><span class="line">    	cin&gt;&gt;a[i];</span><br><span class="line">    	<span class="keyword">if</span>(s.<span class="built_in">count</span>(a[i])) ok=<span class="literal">true</span>;</span><br><span class="line">    	<span class="keyword">else</span> s.<span class="built_in">insert</span>(a[i]);</span><br><span class="line">    	<span class="keyword">if</span>(a[i]==<span class="number">0</span>) ++zero;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(zero&gt;<span class="number">0</span>) &#123;</span><br><span class="line">    	cout&lt;&lt;n-zero&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    	<span class="keyword">if</span>(ok) cout&lt;&lt;n&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    	<span class="keyword">else</span> cout&lt;&lt;n+<span class="number">1</span>&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="B"><a href="#B" class="headerlink" title="B"></a>B</h2><p><strong>thinking</strong></p>
-<p><strong>solution</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> n;string s;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    cin &gt;&gt; s;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">0</span>, y = <span class="number">0</span>;</span><br><span class="line">    <span class="type">char</span> pre = <span class="string">&#x27;?&#x27;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">length</span>(); i += <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s[i] != s[i + <span class="number">1</span>])x++;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (pre != s[i])y++;</span><br><span class="line">            pre = s[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; x &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; <span class="built_in">max</span>(<span class="number">1</span>, y) &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="C"><a href="#C" class="headerlink" title="C"></a>C</h2><p><strong>thinking</strong></p>
-<p><strong>solution</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n;cin&gt;&gt;n;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">a</span><span class="params">(n)</span></span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i) cin&gt;&gt;a[i];</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">pre</span>(n,<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(<span class="number">5001</span>,<span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i) &#123;</span><br><span class="line">    	<span class="keyword">if</span>(i==<span class="number">0</span>) &#123;</span><br><span class="line">    		<span class="keyword">for</span>(<span class="type">int</span> j=a[i];j&lt;=n;++j) pre[i][j]++;</span><br><span class="line">    	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    		<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=n;++j) pre[i][j]+=pre[i<span class="number">-1</span>][j];</span><br><span class="line">    		<span class="keyword">for</span>(<span class="type">int</span> j=a[i];j&lt;=n;++j) pre[i][j]++;</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//枚举bc的情况，</span></span><br><span class="line">	ll ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> b=<span class="number">1</span>;b&lt;n;++b) &#123;</span><br><span class="line">    	<span class="keyword">for</span>(<span class="type">int</span> c=b+<span class="number">1</span>;c&lt;n;++c) &#123;</span><br><span class="line">    		<span class="comment">//[0,b-1]-&gt;小于pc的个数</span></span><br><span class="line">    		<span class="comment">//[c+1,n-1]-&gt;小于pb的个数</span></span><br><span class="line">    		ans+=(ll)pre[b<span class="number">-1</span>][a[c]<span class="number">-1</span>]*(pre[n<span class="number">-1</span>][a[b]<span class="number">-1</span>]-pre[c][a[b]<span class="number">-1</span>]);</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;ans&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>algorithm</category>
-      </categories>
-      <tags>
-        <tag>codeforces</tag>
       </tags>
   </entry>
   <entry>
