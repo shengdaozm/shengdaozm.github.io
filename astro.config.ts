@@ -36,8 +36,11 @@ export default defineConfig({
 
   // [Adapter]
   // https://docs.astro.build/en/guides/deploy/
-  adapter: vercel(),
-  output: 'server',
+  // Deploy to Vercel
+  // adapter: vercel(),
+  // output: 'server',
+  // Deploy to GitHub Pages (static output)
+  output: 'static',
   // Local (standalone)
   // adapter: node({ mode: 'standalone' }),
   // output: 'server',
