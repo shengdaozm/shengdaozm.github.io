@@ -16,11 +16,18 @@ const docsByCate = docsCollection.reduce((acc: { [key: string]: typeof docsColle
   return acc
 }, {})
 
-const docCategories = {
+const cateNameMap: Record<string, string> = {
+  nginx: 'Nginx 源码阅读',
+  redis: 'Redis 源码阅读',
   setup: 'Setup',
   integrations: 'Integrations',
   advanced: 'Advanced'
 }
+
+const cateOrder = Object.keys(docsByCate).filter((id) => docsByCate[id]?.length)
+const docCategories = Object.fromEntries(
+  cateOrder.map((id) => [id, cateNameMap[id] ?? id])
+)
 
 type Props = {
   title?: boolean
@@ -31,7 +38,7 @@ const { title = true, class: className, ...props } = Astro.props
 ---
 
 <docs-toc class={cn('not-prose', className)} {...props}>
-  {title && <h2 class='text-foreground font-medium'>DOCS</h2>}
+  {title && <h2 class='text-foreground font-medium'>文档</h2>}
   <ul class='mt-4 flex flex-col gap-y-5'>
     {
       Object.entries(docCategories).map(([id, title]: [string, string]) => (
